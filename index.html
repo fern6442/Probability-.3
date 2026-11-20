@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ห้องทดลองความน่าจะเป็น ม.3</title>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#3b2f6b;--pink:#ff6fae;--pd:#d14a88;--blue:#4cc3ff;--bd:#2593cc;--yel:#ffc93c;--yd:#d99a00;--grn:#5ddb8c;--gd:#2fa75d;--bg1:#ffe3f1;--bg2:#d9f1ff}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Mali','Tahoma',sans-serif;color:var(--ink);background:linear-gradient(135deg,var(--bg1),var(--bg2));min-height:100vh;padding:14px}
+h1,h2,h3{margin:.2em 0}
+.wrap{max-width:1000px;margin:0 auto}
+.card{background:#fff;border-radius:26px;padding:18px;margin-bottom:18px;border:3px solid #fff;box-shadow:0 10px 0 rgba(120,90,200,.18),0 18px 30px rgba(120,90,200,.15)}
+.btn{border:0;border-radius:16px;padding:10px 18px;font:700 16px 'Mali',sans-serif;color:#fff;background:var(--pink);box-shadow:0 6px 0 var(--pd);cursor:pointer;margin:4px}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--pd)}
+.btn.b{background:var(--blue);box-shadow:0 6px 0 var(--bd)}.btn.g{background:var(--grn);box-shadow:0 6px 0 var(--gd)}.btn.y{background:var(--yel);color:var(--ink);box-shadow:0 6px 0 var(--yd)}
+.btn:focus-visible,input:focus-visible,select:focus-visible{outline:4px solid var(--ink);outline-offset:2px}
+input[type=text],input[type=password],select{width:100%;padding:11px;border-radius:14px;border:3px solid #cdbcff;font:16px 'Mali',sans-serif;margin:5px 0 10px}
+.hide{display:none!important}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{background:#fff;border-radius:18px 18px 0 0}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.ctl label{display:flex;justify-content:space-between;font-weight:700;margin-top:8px}
+.ctl output{background:var(--yel);padding:0 12px;border-radius:12px}
+input[type=range]{width:100%;accent-color:var(--pink);height:28px}
+canvas{width:100%;background:#fbf8ff;border-radius:18px;border:3px solid #e5dbff}
+.stage{height:190px;display:flex;align-items:center;justify-content:center;perspective:600px;background:radial-gradient(circle at 50% 30%,#fff,#efe6ff);border-radius:20px}
+.cube{width:100px;height:100px;position:relative;transform-style:preserve-3d;transition:transform .35s}
+.face{position:absolute;width:100px;height:100px;display:flex;align-items:center;justify-content:center;font:700 48px 'Mali';color:#fff;border-radius:16px;border:4px solid #fff;backface-visibility:hidden}
+.coin{width:120px;height:120px;position:relative;transform-style:preserve-3d;transition:transform .5s}
+.cf{position:absolute;inset:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 34px 'Mali';backface-visibility:hidden;border:6px solid #f0a500;box-shadow:inset 0 -8px 0 rgba(0,0,0,.15),0 10px 0 #c98a00}
+.ball{width:110px;height:110px;border-radius:50%;box-shadow:inset -14px -14px 24px rgba(0,0,0,.25),inset 10px 10px 20px rgba(255,255,255,.6),0 14px 10px rgba(0,0,0,.15);transition:background .2s}
+.info{background:#f4efff;border-radius:16px;padding:10px 14px;margin-top:10px;line-height:1.6}
+.q{border-radius:18px;background:#fbf8ff;border:3px solid #e5dbff;padding:12px;margin-bottom:12px}
+.q label{display:block;padding:5px 8px;border-radius:10px;cursor:pointer}
+.q label:hover{background:#efe6ff}
+.ok{border-color:var(--gd)!important;background:#eafff2!important}.no{border-color:var(--pd)!important;background:#fff0f6!important}
+.exp{margin-top:6px;font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border:2px solid #e5dbff;padding:6px;text-align:left}th{background:#efe6ff}
+.scroll{overflow-x:auto}
+.title{font-size:clamp(26px,5vw,40px);text-align:center;text-shadow:3px 3px 0 #fff,5px 5px 0 #ffc2de}
+.pill{display:inline-block;background:var(--grn);color:#fff;padding:2px 12px;border-radius:14px;font-weight:700}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+body{background:linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,.5)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Ctext x='18' y='52' font-size='34'%3E🎲%3C/text%3E%3Ctext x='140' y='88' font-size='30'%3E⭐%3C/text%3E%3Ctext x='60' y='150' font-size='36'%3E☁️%3C/text%3E%3Ctext x='160' y='200' font-size='30'%3E🪙%3C/text%3E%3Ctext x='10' y='214' font-size='26'%3E💖%3C/text%3E%3Ctext x='190' y='30' font-size='24'%3E🌈%3C/text%3E%3Ctext x='100' y='215' font-size='24'%3E🍬%3C/text%3E%3C/svg%3E"),linear-gradient(135deg,#ffd6ec,#d6f0ff 50%,#fff3c4);background-attachment:fixed}
+.card{border:4px dashed #ffb3d9}
+.mas{font-size:64px;display:inline-block;animation:bob 2s ease-in-out infinite}
+.mas:nth-child(2){animation-delay:.4s}.mas:nth-child(3){animation-delay:.8s}
+@keyframes bob{50%{transform:translateY(-9px) rotate(5deg)}}
+.hero{display:flex;align-items:center;gap:14px}
+.bubble{background:#fff9d6;border:3px solid #ffd23c;border-radius:22px;padding:10px 16px;flex:1;box-shadow:0 5px 0 #f0c040}
+.kgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.kgrid{grid-template-columns:1fr}}
+.kgrid .card{margin:0;line-height:1.7}
+.kgrid .card:nth-child(1){background:#fff0f7}.kgrid .card:nth-child(2){background:#eef9ff}.kgrid .card:nth-child(3){background:#fffbe6}.kgrid .card:nth-child(4){background:#effff5}.kgrid .card:nth-child(5){background:#f5efff}.kgrid .card:nth-child(6){background:#fff4ea}
+.big{font-size:44px;text-align:center}
+.formula{font-size:26px;font-weight:700;text-align:center;background:#fff;border:3px solid #ffd23c;border-radius:18px;padding:10px;margin:8px 0}
+.d6{font-size:42px;text-align:center;letter-spacing:6px}.d6 .on{background:#ffc93c;border-radius:12px;padding:0 4px}
+.scale{height:26px;border-radius:14px;background:linear-gradient(90deg,#ff8aa8,#ffd23c,#5ddb8c);border:3px solid #fff;box-shadow:0 4px 0 rgba(0,0,0,.12);margin:12px 0 4px}
+.sl{display:flex;justify-content:space-between;font-size:13px;font-weight:700}
+.stage{height:230px;background:linear-gradient(#bfe9ff 68%,#9ee6a8 68%);border:3px solid #fff;overflow:hidden}
+.face{background:linear-gradient(145deg,#fff,#ffe6f3);color:var(--ink);border:3px solid #ffc2de;box-shadow:inset 0 0 12px rgba(255,150,200,.4)}
+.pp{display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);width:70px;height:70px}
+.pp i{width:17px;height:17px;border-radius:50%;background:var(--pc);box-shadow:inset -3px -3px 4px rgba(0,0,0,.3);place-self:center}
+.cf{flex-direction:column;background:radial-gradient(circle at 35% 30%,#fff6a8,#ffd23c 45%,#e8a800);color:#8a5a00}
+.cf::after{content:"";position:absolute;inset:8px;border-radius:50%;border:3px dotted rgba(138,90,0,.45)}
+.cf span{font-size:50px;line-height:1}.cf small{font-size:15px;font-weight:700}
+.ball{position:relative}
+.eyes{position:absolute;top:36%;left:0;right:0;display:flex;justify-content:center;gap:24px}
+.eyes i{width:13px;height:18px;border-radius:50%;background:#3b2f6b;box-shadow:inset 3px 3px 0 #fff}
+.smile{position:absolute;top:58%;left:50%;width:26px;height:13px;border-bottom:4px solid #3b2f6b;border-radius:0 0 26px 26px;transform:translateX(-50%)}
+.ch{position:absolute;top:55%;width:16px;height:10px;border-radius:50%;background:#ff9bbd;opacity:.8}.ch.l{left:16%}.ch.r{right:16%}
+.tabs .btn{font-size:17px}
+
+textarea{width:100%;padding:10px;border-radius:14px;border:3px solid #cdbcff;font:15px 'Mali',sans-serif;margin:4px 0 8px}
+.er{display:flex;gap:8px;align-items:center}.er input[type=text]{margin:3px 0}
+.hint{background:#fff9d6;border:2px dashed #ffd23c;border-radius:12px;padding:6px 10px;margin-top:6px}
+.hb{padding:4px 12px!important;font-size:14px!important;margin:6px 0!important}
+.kgrid .card:nth-child(7){background:#fff0f0}
+.tk{background:#fffbe0;border:4px dashed #f0a500;border-radius:16px;padding:10px 16px;text-align:center;transform:rotate(-2deg);box-shadow:0 8px 0 rgba(0,0,0,.12)}
+.tkn{font-size:38px;letter-spacing:6px;font-weight:700;color:#d14a88}.tkw{font-size:12px;margin-top:4px}
+.gq{font-size:20px;font-weight:700;background:#fff9d6;border:3px solid #ffd23c;border-radius:18px;padding:12px;margin:10px 0}
+.gv{font-size:38px;text-align:center;min-height:56px;letter-spacing:2px;word-break:break-all}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.gopt{border:0;border-radius:18px;padding:14px 8px;font:700 20px 'Mali',sans-serif;color:#fff;cursor:pointer;box-shadow:0 7px 0 rgba(0,0,0,.2);transition:transform .1s}
+.gopt:nth-child(1){background:#ff6fae}.gopt:nth-child(2){background:#4cc3ff}.gopt:nth-child(3){background:#5ddb8c}.gopt:nth-child(4){background:#ffa54c}
+.gopt:active{transform:translateY(4px)}.gopt.hov{outline:5px solid var(--ink);transform:scale(1.04)}
+.gopt.right{background:#2fa75d!important}.gopt.wrong{background:#999!important}
+.tbar{height:16px;background:#e5dbff;border-radius:10px;overflow:hidden;margin:6px 0}
+#tfill{height:100%;width:100%;background:linear-gradient(90deg,#5ddb8c,#ffd23c,#ff6fae);transition:width .1s linear}
+.camwrap{position:relative;width:100%;max-width:320px;aspect-ratio:4/3;margin:auto;border-radius:18px;overflow:hidden;background:#3b2f6b;border:4px solid #fff;box-shadow:0 8px 0 rgba(0,0,0,.15);transform:scaleX(-1)}
+.camwrap video,.camwrap canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.camwrap canvas{background:transparent;border:0;border-radius:0}
+.foot{text-align:center;margin:6px 0 24px;font-weight:700;background:#fff;border:3px dashed #ffb3d9;border-radius:20px;padding:10px;box-shadow:0 6px 0 rgba(0,0,0,.08)}
+
+/* ===== v2: หัวข้อชัด + เกมพอเพียง ===== */
+.ptitle{font-size:clamp(26px,5.6vw,42px);font-weight:700;color:#fff;text-align:center;padding:14px 18px;border-radius:28px;margin:4px 0 16px;line-height:1.3;border:4px solid #fff;text-shadow:0 3px 0 rgba(40,20,90,.5);box-shadow:0 8px 0 rgba(60,30,110,.25)}
+.p1{background:linear-gradient(90deg,#c9246f,#7d3bd0)}.p2{background:linear-gradient(90deg,#1573b5,#6d3fd6)}.p3{background:linear-gradient(90deg,#b85c00,#c9246f)}.p4{background:linear-gradient(90deg,#17803f,#1573b5)}
+.card h2{font-size:clamp(24px,4.2vw,34px);font-weight:700;color:#2a1d5c}
+.card h3{display:table;font-size:clamp(21px,3.6vw,29px);font-weight:700;color:#2a1d5c;background:linear-gradient(transparent 52%,#ffe27a 52%);padding:0 8px;border-radius:6px;margin:.1em 0 .4em;line-height:1.4}
+.title{font-size:clamp(30px,6vw,46px);font-weight:700;color:#2a1d5c}
+.q>b{display:block;font-size:18px;margin-bottom:4px;color:#2a1d5c}
+.tabs .btn{font-size:clamp(15px,2.4vw,18px)}
+.tabs .btn.on,.gtabs .btn.on{outline:4px solid var(--ink);outline-offset:2px;transform:translateY(2px)}
+.foot{font-size:clamp(16px,2.8vw,21px);color:#2a1d5c;background:linear-gradient(90deg,#fff,#fff0f7,#fff)}
+.kgrid .card:nth-child(8){background:#fffbe0}
+.gtabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.gopt{line-height:1.3}.gopt small{display:block;font-size:13px;font-weight:600}
+.gopt.sel{outline:5px solid var(--ink);transform:scale(1.03)}
+@media(max-width:520px){.gopts{grid-template-columns:1fr}}
+.fscene{background:linear-gradient(#bfe9ff 60%,#9ee6a8 60%);border:3px solid #fff;border-radius:18px;padding:10px;min-height:96px;display:flex;align-items:center;justify-content:center;margin:8px 0}
+.fv{font-size:clamp(26px,5vw,34px);text-align:center;letter-spacing:2px;line-height:1.4}
+#lotip{line-height:1.7}
+
+/* ===== v3: แปลงผักตัวละครเดินได้ ===== */
+#gc{touch-action:none;cursor:pointer;display:block;background:#bdeea4}
+.dpad{display:grid;grid-template-columns:repeat(3,64px);gap:6px;justify-content:center;margin:10px auto}
+.dpad .btn{margin:0;padding:10px 0;font-size:22px;touch-action:none;user-select:none}
+#fpanel{margin-top:8px}
+#fo small{display:block;font-size:13px;font-weight:600}
+</style></head><body><div class="wrap">
+
+<!-- LOGIN -->
+<section id="login" class="card" style="max-width:460px;margin:6vh auto"><div style="text-align:center"><span class="mas">🐻</span><span class="mas">🐰</span><span class="mas">🐱</span></div>
+ <div class="title">🎲 ห้องทดลอง<br>ความน่าจะเป็น 🪙</div>
+ <p style="text-align:center">สำหรับนักเรียนชั้น ม.3</p>
+ <label>ชื่อ-นามสกุล</label><input id="nm" type="text" placeholder="เช่น สมชาย ใจดี" autocomplete="off">
+ <label>ห้อง / เลขที่</label><input id="cl" type="text" placeholder="เช่น ม.3/2 เลขที่ 15" autocomplete="off">
+ <div id="lerr" style="color:var(--pd);font-weight:700"></div>
+ <button class="btn" style="width:100%" onclick="studentLogin()">เข้าสู่ระบบนักเรียน</button>
+ <button class="btn b" style="width:100%" onclick="$('tbox').classList.toggle('hide')">เข้าสู่ระบบครู</button>
+ <div id="tbox" class="hide" style="margin-top:8px"><label>รหัสผ่านครู</label><input id="tp" type="password" placeholder="รหัสผ่าน" onkeydown="if(event.key==='Enter')teacherLogin()"><button class="btn g" style="width:100%" onclick="teacherLogin()">ยืนยัน</button></div>
+</section>
+
+<!-- STUDENT APP -->
+<section id="app" class="hide">
+ <div class="card top"><div><h2>🎲 ห้องทดลองความน่าจะเป็น</h2><span class="pill" id="who"></span></div>
+  <div><button class="btn g" onclick="xls(true)">⬇ ดาวน์โหลดผลของฉัน (Excel)</button><button class="btn y" onclick="logout()">ออกจากระบบ</button></div></div>
+ <div class="tabs" id="mtabs"><button class="btn" data-t="learn" onclick="tab('learn')">📖 หน้า 1 ความรู้</button><button class="btn b" data-t="lab" onclick="tab('lab')">🔬 หน้า 2 ทดลองสุ่ม</button><button class="btn y" data-t="game" onclick="tab('game')">🎮 หน้า 3 เกม</button><button class="btn g" data-t="quiz" onclick="tab('quiz')">📝 หน้า 4 แบบฝึกหัด</button></div>
+
+ <div id="learn" style="margin-top:12px">
+ <div class="ptitle p1">📖 หน้า 1 · ความรู้ความน่าจะเป็น</div>
+ <div class="card hero"><span class="mas">🐻</span><div class="bubble"><b>สวัสดีจ้ะ! น้องหมีจะพาเรียนความน่าจะเป็น</b><br>อ่านความรู้หน้านี้ให้จบ แล้วไปทดลองสุ่มกับน้องกระต่ายกันนะ</div></div>
+ <div class="kgrid">
+  <div class="card"><h3>🎯 1. การทดลองสุ่ม</h3><div class="big">🪙 🎲 🛍️</div>คือการทดลองที่ <b>บอกผลล่วงหน้าไม่ได้</b> แต่รู้ว่าอาจเกิดผลอะไรได้บ้าง เช่น โยนเหรียญ ทอดลูกเต๋า หยิบลูกบอลจากถุง</div>
+  <div class="card"><h3>📦 2. ปริภูมิตัวอย่างและเหตุการณ์</h3><div class="d6">⚀ <span class="on">⚁</span> ⚂ <span class="on">⚃</span> ⚄ <span class="on">⚅</span></div><b>ปริภูมิตัวอย่าง (S)</b> = ผลลัพธ์ทั้งหมดที่เป็นไปได้ S = {1, 2, 3, 4, 5, 6}<br><b>เหตุการณ์ (A)</b> = ผลลัพธ์ที่เราสนใจ เช่น แต้มคู่ A = {2, 4, 6}</div>
+  <div class="card"><h3>🧮 3. สูตรความน่าจะเป็น</h3><div class="formula">P(A) = n(A) ÷ n(S)</div>เมื่อทุกผลลัพธ์มีโอกาสเกิดเท่ากัน<br><b>ตัวอย่าง:</b> ทอดลูกเต๋า ได้แต้มคู่ = 3 ÷ 6 = <b>1/2</b></div>
+  <div class="card"><h3>📈 4. ความถี่สัมพัทธ์</h3><div class="formula">จำนวนครั้งที่เกิด A ÷ จำนวนครั้งที่ทดลอง</div>ยิ่งทดลองซ้ำหลายครั้ง ค่านี้ยิ่ง <b>เข้าใกล้ P(A)</b> ซึ่งเราจะเห็นกับตาในหน้า 2</div>
+  <div class="card"><h3>🚦 5. ค่าของ P(A)</h3><div class="scale"></div><div class="sl"><span>0 เป็นไปไม่ได้</span><span>0.5 พอๆ กัน</span><span>1 แน่นอน</span></div>0 ≤ P(A) ≤ 1 เสมอ เช่น ทอดลูกเต๋าได้แต้ม 7 มีค่า P = 0</div>
+  <div class="card"><h3>🌍 6. ใช้ในชีวิตจริง</h3>• พยากรณ์อากาศ “ฝนตก 70%”<br>• ประเมินความเสี่ยงของเกมและการจับสลาก<br>• ประกันภัย และการตรวจคุณภาพสินค้าในโรงงาน<br>ล้วนใช้ความถี่สัมพัทธ์จากข้อมูลจริงมาประมาณความน่าจะเป็น</div>
+  <div class="card"><h3>🎫 7. ลุ้นสลากกินแบ่ง</h3>รางวัลที่ 1 (เลข 6 หลักตรงกัน): P = 1/1,000,000<br>เลขท้าย 3 ตัว (มี 2 รางวัล): P = 2/1,000 = 1/500<br>เลขท้าย 2 ตัว (มี 1 รางวัล): P = 1/100<br>ซื้อหลายใบ โอกาสถูกอย่างน้อย 1 ใบเพิ่มขึ้น แต่ยังน้อยมาก 🙏 สลากเป็นเพียงตัวอย่างการคำนวณ ไม่ควรเล่นพนันเกินกำลัง</div>
+  <div class="card"><h3>🌾 8. ความน่าจะเป็นกับการตัดสินใจ</h3>ปรัชญาของเศรษฐกิจพอเพียงที่พ่อหลวง ร.9 พระราชทาน ให้ตัดสินใจอย่าง <b>พอประมาณ มีเหตุผล มีภูมิคุ้มกัน</b> บนเงื่อนไข <b>ความรู้และคุณธรรม</b><br>ความรู้เรื่องความน่าจะเป็นช่วยประเมินโอกาส เช่น พยากรณ์ฝน 70% แล้ววางแผนปลูกพืชไม่ให้เสี่ยงเกินไป<br>🎮 ไปเดินในแปลงผักจำลอง “แปลงผักพอเพียง” ที่หน้า 3</div>
+ </div>
+ <div style="text-align:center;margin-top:16px"><button class="btn" onclick="tab('lab')">ไปทดลองสุ่มกันเลย ▶</button></div>
+</div>
+<div id="lab" class="hide" style="margin-top:12px">
+ <div class="ptitle p2">🔬 หน้า 2 · ห้องทดลองสุ่ม</div>
+ <div class="card hero"><span class="mas">🐰</span><div class="bubble"><b>น้องกระต่ายชวนทดลอง!</b> เลือกการทดลอง เลื่อน slider ปรับจำนวนครั้งและจำนวนชุด แล้วกด “เริ่มทดลอง” ดูว่าเส้นกราฟทุกชุดเข้าใกล้เส้นประไหม</div></div>
+  <div class="grid">
+   <div class="card ctl">
+    <h3>⚙️ ตั้งค่าการทดลอง</h3>
+    <label>การทดลอง</label>
+    <select id="ex" onchange="setEx()"><option value="coin">🪙 โยนเหรียญ 1 เหรียญ</option><option value="die">🎲 ทอดลูกเต๋า 1 ลูก</option><option value="lot">🎫 ซื้อสลากกินแบ่ง (รางวัลที่ 1 / เลขท้าย 3 ตัว / เลขท้าย 2 ตัว)</option><option value="ball">🛍️ หยิบลูกบอลจากถุง (แดง 3 / น้ำเงิน 2 / เหลือง 5)</option></select>
+    <label>เหตุการณ์ที่สนใจ</label><select id="tg"></select>
+    <label>จำนวนครั้งที่สุ่มต่อชุด <output id="No">50</output></label>
+    <input id="N" type="range" min="10" max="500" step="10" value="50" oninput="No.value=this.value">
+    <label>จำนวนชุดการทดลอง <output id="So">5</output></label>
+    <input id="S" type="range" min="1" max="10" value="5" oninput="So.value=this.value">
+    <div class="info hide" id="lotip"></div><button class="btn y hb hide" id="lotbtn" onclick="lotMax()">🍀 ตั้งค่าเพิ่มโอกาสถูกรางวัล</button>
+    <button class="btn" onclick="run()">▶ เริ่มทดลอง</button><button class="btn y" onclick="stop()">⏸ หยุด</button>
+    <div class="stage" style="margin-top:10px" id="stage"></div>
+    <div class="info" id="info">กด “เริ่มทดลอง” เพื่อดูผลแบบเรียลไทม์</div>
+    <div class="info hide" id="tally"></div>
+   </div>
+   <div class="card">
+    <h3>📊 ความถี่สัมพัทธ์ของทุกผลลัพธ์ (แท่ง = ผลทดลอง, เส้นประ = ทฤษฎี)</h3>
+    <canvas id="c1" width="560" height="260"></canvas>
+    <h3 style="margin-top:14px">📈 ความถี่สัมพัทธ์ของเหตุการณ์ที่สนใจ (1 เส้น = 1 ชุด)</h3>
+    <canvas id="c2" width="560" height="260"></canvas>
+   </div>
+  </div>
+  <div class="card hero"><span class="mas">🐱</span><div class="bubble">🔍 <b>ลองสังเกต:</b> ชุดที่สุ่มน้อยครั้งกราฟแกว่งมาก แต่เมื่อสุ่มมากขึ้น ทุกเส้นจะเข้าใกล้เส้นประ ลองเพิ่ม slider ดูนะ!</div></div>
+ </div>
+
+ <div id="game" class="hide" style="margin-top:12px">
+ <div class="ptitle p3">🎮 หน้า 3 · เกมตามรอยพ่อหลวง</div>
+ <div class="card hero"><span class="mas">🐱</span><div class="bubble"><b>เลือกเล่นได้ 2 เกม</b> เกมแปลงผักใช้ <b>ปุ่มลูกศร/แตะจอ</b> เดินได้เลย หรือเปิดกล้อง (MediaPipe) แล้ว <b>ขยับมือ</b> เพื่อพาตัวละครเดิน · เกมด่านใช้ <b>ชูนิ้ว 1–4</b> ค้างไว้ ~1 วินาทีเพื่อเลือกข้อ ก–ง และ <b>👍</b> เพื่อไปต่อ</div></div>
+ <div class="gtabs"><button class="btn y on" data-g="farm" onclick="gSel('farm')">🥬 เกมแปลงผักพอเพียง (ตามรอยพ่อหลวง)</button><button class="btn b" data-g="quiz" onclick="gSel('quiz')">⏱ เกมด่านความน่าจะเป็น</button></div>
+ <div class="grid">
+  <div>
+   <div id="farmBox" class="card">
+    <h3 class="gh">🥬 แปลงผักพอเพียง ตามรอยพ่อหลวง</h3>
+    <div class="top"><b id="fprog">วันที่ 0/6</b><b>💰 <span id="fsc">30</span> บาท</b><b id="fbd">⭐ น้ำใจ 0</b></div>
+    <div id="fwx" class="info"></div>
+    <canvas id="gc" width="640" height="400" role="img" aria-label="แผนที่แปลงผักจำลอง มีตัวละครเกษตรกรเดินไปตามบ้าน ร้านเมล็ดพันธุ์ สระน้ำ แปลงผัก ตลาด และยุ้งฉาง"></canvas>
+    <div id="ft" class="hint" style="min-height:34px;margin-top:8px"></div>
+    <div id="fpanel" class="hide"><div id="fq" class="gq"></div><div id="fo" class="gopts"></div></div>
+    <div class="dpad" aria-label="ปุ่มเดิน">
+     <button class="btn b" data-d="U" style="grid-area:1/2" aria-label="เดินขึ้น">⬆️</button>
+     <button class="btn b" data-d="L" style="grid-area:2/1" aria-label="เดินซ้าย">⬅️</button>
+     <button class="btn b" data-d="D" style="grid-area:2/2" aria-label="เดินลง">⬇️</button>
+     <button class="btn b" data-d="R" style="grid-area:2/3" aria-label="เดินขวา">➡️</button>
+    </div>
+    <div id="fm" class="info"></div>
+    <button class="btn" onclick="fStart()">🥬 เริ่มเกมแปลงผัก</button>
+   </div>
+   <div id="qgBox" class="card hide">
+    <h3 class="gh">⏱ ด่านความน่าจะเป็น</h3>
+    <div class="top"><b id="gprog">ด่าน 0/10</b><b>⭐ <span id="gsc">0</span></b><b id="glf">❤️❤️❤️</b><b>🔥 คอมโบ <span id="gcb">0</span></b></div>
+    <div class="tbar"><div id="tfill"></div></div>
+    <div id="gq" class="gq">กด “เริ่มเกม” เพื่อเล่น</div>
+    <div id="gv" class="gv">🎲🪙🎫</div>
+    <div id="go" class="gopts"></div>
+    <div id="gm" class="info hide"></div>
+    <button class="btn" onclick="gStart()">🎮 เริ่มเกม</button>
+   </div>
+  </div>
+  <div class="card"><h3>📷 ควบคุมด้วยมือ (MediaPipe)</h3>
+   <div class="camwrap"><video id="vid" playsinline muted></video><canvas id="ov" width="320" height="240"></canvas></div>
+   <div class="info" id="fc" style="font-weight:700">กล้องปิดอยู่</div>
+   <button class="btn b" id="camb" onclick="toggleCam()">📷 เปิดกล้อง</button>
+   <div class="info" id="camt"><b>เกมแปลงผัก:</b> 🖐 ขยับมือไปทางที่อยากเดิน (มืออยู่กลางภาพ = หยุด) · ชูนิ้ว 1–4 ค้างไว้เพื่อเลือกในหน้าต่าง<br><b>เกมด่าน:</b> ชูนิ้ว 1 = ก, 2 = ข, 3 = ค, 4 = ง แล้วค้างไว้ประมาณ 1 วินาทีเพื่อยืนยัน · ยกนิ้วโป้ง 👍 ค้างไว้เพื่อไปต่อ ต้องต่ออินเทอร์เน็ตเพื่อโหลด MediaPipe และอนุญาตให้ใช้กล้อง ถ้าไม่เปิดกล้องก็เล่นด้วยการคลิก/แตะได้</div>
+   <h3>🏆 สถิติของฉัน</h3><div id="gbest" class="info"></div>
+  </div>
+ </div>
+</div>
+<div id="quiz" class="card hide">
+  <div class="ptitle p4">📝 หน้า 4 · แบบฝึกหัด (<span id="qn">10</span> ข้อ)</div><div class="info">กด “💡 ขอคำใบ้” ได้เมื่อติดขัด และเมื่อส่งคำตอบจะมีเฉลยพร้อมคำอธิบาย <b>ทุกข้อ</b></div><br>
+  <div id="qs"></div>
+  <button class="btn" onclick="grade()">ส่งคำตอบ</button><button class="btn y" onclick="buildQuiz()">ทำใหม่</button>
+  <div class="info hide" id="res"></div>
+ </div>
+</section>
+
+<!-- TEACHER -->
+<section id="teacher" class="hide">
+ <div class="card top"><h2>👩‍🏫 หน้าครู: คะแนนและบันทึกการใช้งาน</h2>
+  <div><button class="btn g" onclick="xls(false)">⬇ ดาวน์โหลด Excel</button><button class="btn b" onclick="renderT()">รีเฟรช</button><button class="btn" onclick="clearAll()">ล้างข้อมูล</button><button class="btn y" onclick="logout()">ออกจากระบบ</button></div></div>
+ <div class="tabs"><button class="btn b" onclick="tTab('s')">📊 คะแนนนักเรียน</button><button class="btn g" onclick="tTab('e')">✏️ จัดการแบบฝึกหัด</button></div><div id="tscore"><div class="card"><h3>สรุปนักเรียน</h3><div class="scroll" id="tsum"></div></div>
+ <div class="card"><h3>บันทึกการใช้งานล่าสุด</h3><div class="scroll" id="tlog"></div></div></div>
+ <div id="tedit" class="card hide"><h3>✏️ จัดการแบบฝึกหัด</h3><div class="info">เพิ่ม/ลดข้อ แก้โจทย์ ตัวเลือก คำใบ้ และเฉลยได้ แล้วกด “บันทึก” (เลือกวงกลมหน้าตัวเลือกที่เป็นคำตอบที่ถูก) ข้อสอบที่แก้จะมีผลกับนักเรียนที่เปิดสื่อในเบราว์เซอร์/เครื่องนี้</div><div id="elist" style="margin-top:10px"></div>
+  <button class="btn" onclick="addQ()">➕ เพิ่มข้อ</button><button class="btn g" onclick="saveE()">💾 บันทึก</button><button class="btn y" onclick="resetE()">↩ คืนค่าข้อสอบเดิม</button><div class="info hide" id="emsg"></div></div>
+</section>
+<footer class="foot">📐 สื่อคณิตศาสตร์ โดย คุณครูสุจิรา สังข์แก้ว</footer>
+</div>
+
+<script>
+const TEACHER_PASS='teacher123'; // ครูเปลี่ยนรหัสผ่านได้ที่บรรทัดนี้
+const $=id=>document.getElementById(id), now=()=>new Date().toLocaleString('th-TH');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let db={u:{},l:[]}; try{db=JSON.parse(localStorage.getItem('probdb'))||db}catch(e){}
+const save=()=>{try{localStorage.setItem('probdb',JSON.stringify(db))}catch(e){}};
+let me=null;
+function log(a){db.l.push({t:now(),u:me?me.key:'ครู',a});save()}
+
+/* ---------- login ---------- */
+function show(id){['login','app','teacher'].forEach(x=>$(x).classList.toggle('hide',x!==id))}
+function studentLogin(){
+ const n=$('nm').value.trim(),c=$('cl').value.trim();
+ if(!n||!c){$('lerr').textContent='กรุณากรอกชื่อและห้อง/เลขที่ให้ครบ';return}
+ const k=n+' ('+c+')';
+ me=db.u[k]=db.u[k]||{key:k,name:n,cls:c,login:0,exp:0,sc:[],game:[],farm:[]};
+ me.login++;me.game=me.game||[];me.farm=me.farm||[];me.last=now();log('เข้าสู่ระบบ');
+ $('who').textContent='👤 '+k;show('app');tab('learn');setEx();buildQuiz();
+}
+function teacherLogin(){
+ const p=$('tp').value.trim();
+ if(p!==TEACHER_PASS){$('lerr').textContent='รหัสผ่านครูไม่ถูกต้อง';return}
+ $('lerr').textContent='';$('tp').value='';me=null;show('teacher');renderT();tTab('s');
+}
+function logout(){stop();stopCam();gStop();G=null;F=null;if(me)log('ออกจากระบบ');me=null;$('nm').value='';$('cl').value='';$('lerr').textContent='';show('login')}
+function tab(t){['learn','lab','game','quiz'].forEach(x=>$(x).classList.toggle('hide',x!==t));document.querySelectorAll('#mtabs .btn').forEach(b=>b.classList.toggle('on',b.dataset.t===t));if(t!=='game'){gStop();G=null;F=null;stopCam()}else gSel(gmode);if(t==='lab')draw();scrollTo({top:0,behavior:'smooth'})}
+
+/* ---------- experiments ---------- */
+const EX={
+ coin:{n:'โยนเหรียญ',o:['หัว','ก้อย'],p:[.5,.5],f:['1/2','1/2'],c:['#ff6fae','#4cc3ff']},
+ die:{n:'ทอดลูกเต๋า',o:['1','2','3','4','5','6'],p:Array(6).fill(1/6),f:Array(6).fill('1/6'),c:['#ff6fae','#ffa54c','#ffc93c','#5ddb8c','#4cc3ff','#a77bff']},
+ lot:{n:'ซื้อสลาก',o:['ถูกรางวัลที่ 1','ถูกเลขท้าย 3 ตัว','ถูกเลขท้าย 2 ตัว','ไม่ถูกรางวัล'],p:[1e-6,.002,.01,.987999],f:['1/1,000,000','2/1,000 = 1/500','1/100','987,999/1,000,000'],c:['#ffc93c','#ff6fae','#4cc3ff','#cfc6e6'],bars:3,ym:.02},
+ ball:{n:'หยิบลูกบอล',o:['แดง','น้ำเงิน','เหลือง'],p:[.3,.2,.5],f:['3/10','2/10','5/10'],c:['#ff4d6d','#3d8bff','#ffd23c']}
+};
+const SETC=['#ff6fae','#4cc3ff','#5ddb8c','#ffa54c','#a77bff','#2fa75d','#d14a88','#2593cc','#d99a00','#7b5cff'];
+let st=null,timer=null,ang=0,ex='coin';
+function setEx(){
+ stop();st=null;ex=$('ex').value;const e=EX[ex];
+ const sN=$('N'),sS=$('S');
+ if(ex==='lot'){sN.min=100;sN.max=5000;sN.step=100;sN.value=1000;sS.min=1;sS.max=10;sS.value=5}
+ else{sN.min=10;sN.max=500;sN.step=10;sN.value=50;sS.min=1;sS.max=10;sS.value=5}
+ $('No').value=sN.value;$('So').value=sS.value;
+ $('lotip').classList.toggle('hide',ex!=='lot');$('lotbtn').classList.toggle('hide',ex!=='lot');lotTip();
+ $('tg').innerHTML=e.o.map((o,i)=>`<option value="${i}">${ex==='die'?'ได้แต้ม ':ex==='ball'?'ได้สี':ex==='lot'?'':'ได้'} ${o}</option>`).join('');
+ buildStage();draw();$('info').textContent='กด “เริ่มทดลอง” เพื่อดูผลแบบเรียลไทม์';
+}
+function pips(n,c){const P={1:[[2,2]],2:[[1,1],[3,3]],3:[[1,1],[2,2],[3,3]],4:[[1,1],[1,3],[3,1],[3,3]],5:[[1,1],[1,3],[2,2],[3,1],[3,3]],6:[[1,1],[2,1],[3,1],[1,3],[2,3],[3,3]]};
+ return `<div class="pp" style="--pc:${c}">${P[n].map(q=>`<i style="grid-area:${q[0]}/${q[1]}"></i>`).join('')}</div>`}
+function buildStage(){
+ const s=$('stage');
+ if(ex==='coin')s.innerHTML='<div class="coin" id="coin"><div class="cf"><span>🐱</span><small>หัว</small></div><div class="cf" style="transform:rotateY(180deg)"><span>🌸</span><small>ก้อย</small></div></div>';
+ else if(ex==='die'){const T=['','','rotateY(90deg)','rotateX(90deg)','rotateX(-90deg)','rotateY(-90deg)','rotateY(180deg)'];
+  const cols=EX.die.c;s.innerHTML='<div class="cube" id="cube">'+[1,2,3,4,5,6].map((n,i)=>`<div class="face" style="transform:${T[n]||''} translateZ(50px)">${pips(n,cols[i])}</div>`).join('')+'</div>'}
+ else if(ex==='lot')s.innerHTML='<div class="tk"><div>🎫 สลากของคุณ</div><div class="tkn" id="tkn">------</div><div id="tkr">กด “เริ่มทดลอง”</div><div class="tkw">รางวัลที่ 1: 482916 · เลขท้าย 3 ตัว: 357, 804 · เลขท้าย 2 ตัว: 62</div></div>';
+ else s.innerHTML='<div style="font-size:72px;margin-right:18px">🛍️</div><div class="ball" id="ball" style="background:#ddd"><div class="eyes"><i></i><i></i></div><i class="ch l"></i><i class="ch r"></i><div class="smile"></div></div>';
+}
+function showRes(r){
+ if(ex==='coin'){const el=$('coin');ang=Math.ceil(ang/360)*360+720+(r?180:0);el.style.transform=`rotateY(${ang}deg)`}
+ else if(ex==='die'){const R=['rotateX(0)','rotateY(-90deg)','rotateX(-90deg)','rotateX(90deg)','rotateY(90deg)','rotateY(180deg)'];
+  $('cube').style.transform=`rotateX(-15deg) rotateY(15deg) ${R[r]}`}
+ else if(ex==='lot'){const R=n=>String(Math.floor(Math.random()*10**n)).padStart(n,'0');let x;
+  if(r===0)x='482916';else if(r===1)x=R(3)+(Math.random()<.5?'357':'804');else if(r===2)x=R(4)+'62';
+  else do{x=R(6)}while(x==='482916'||/62$/.test(x)||/(357|804)$/.test(x));
+  $('tkn').textContent=x;$('tkr').textContent=['🎉 ถูกรางวัลที่ 1!','🎊 ถูกเลขท้าย 3 ตัว','🎉 ถูกเลขท้าย 2 ตัว','😢 ไม่ถูกรางวัล'][r]}
+ else $('ball').style.background=EX.ball.c[r];
+}
+function pick(p){let u=Math.random(),a=0;for(let i=0;i<p.length;i++){a+=p[i];if(u<a)return i}return p.length-1}
+function run(){
+ stop();const e=EX[ex],S=+$('S').value,N=+$('N').value,tg=+$('tg').value;
+ st={e,S,N,tg,n:0,cnt:Array.from({length:S},()=>Array(e.o.length).fill(0)),hist:Array.from({length:S},()=>[])};
+ me.exp++;log(`ทดลอง: ${e.n}, ${S} ชุด × ${N} ครั้ง, เหตุการณ์ "${e.o[tg]}"`);save();
+ const step=Math.max(1,Math.ceil(N/150));
+ timer=setInterval(()=>{
+  let last=0;
+  for(let k=0;k<step&&st.n<N;k++){st.n++;
+   for(let s=0;s<S;s++){const r=pick(e.p);st.cnt[s][r]++;st.hist[s].push(st.cnt[s][tg]/st.n);if(s===0)last=r}}
+  showRes(last);draw();if(st.n>=N)stop();
+ },45);
+}
+function stop(){if(timer){clearInterval(timer);timer=null}}
+function draw(){
+ const e=EX[ex],a=$('c1'),b=$('c2'),g=a.getContext('2d'),h=b.getContext('2d'),W=560,H=260,m=34;
+ g.clearRect(0,0,W,H);h.clearRect(0,0,W,H);
+ const yb=e.ym||1,tp=e.p[+$('tg').value],yl=tp>=.25?1:Math.min(1,Math.max(tp*4,.05)),mk=ym=>v=>H-m-Math.min(v,ym)/ym*(H-2*m),ya=mk(yb),yc=mk(yl);
+ [[g,yb,ya],[h,yl,yc]].forEach(([c,ym,f])=>{c.font='13px Mali,sans-serif';c.fillStyle='#3b2f6b';c.strokeStyle='#e5dbff';c.lineWidth=1;
+  for(let i=0;i<=4;i++){const v=ym*i/4;c.beginPath();c.moveTo(m,f(v));c.lineTo(W-10,f(v));c.stroke();c.fillText(v<.1?v.toFixed(3):v.toFixed(2),0,f(v)+4)}});
+ const k=e.bars||e.o.length,bw=(W-m-10)/k;
+ const tot=st?st.n*st.S:0;
+ e.o.slice(0,k).forEach((o,i)=>{
+  let tc=0;if(st)st.cnt.forEach(r=>tc+=r[i]);const v=tot?tc/tot:0,x=m+i*bw+bw*.15,w=bw*.7;
+  g.fillStyle=e.c[i];g.beginPath();g.roundRect(x,ya(v),w,H-m-ya(v),8);g.fill();
+  g.strokeStyle='#3b2f6b';g.setLineDash([6,4]);g.lineWidth=2;g.beginPath();g.moveTo(x-4,ya(e.p[i]));g.lineTo(x+w+4,ya(e.p[i]));g.stroke();g.setLineDash([]);
+  g.fillStyle='#3b2f6b';g.textAlign='center';g.fillText(o,x+w/2,H-12);if(tot)g.fillText(v.toFixed(2),x+w/2,ya(v)-5);g.textAlign='left';
+ });
+ const t=e.p[+$('tg').value];
+ h.strokeStyle='#3b2f6b';h.setLineDash([6,4]);h.lineWidth=2;h.beginPath();h.moveTo(m,yc(t));h.lineTo(W-10,yc(t));h.stroke();h.setLineDash([]);
+ const ty=$('tally');
+ if(!st){ty.classList.add('hide');return}
+ if(ex==='lot'){ty.classList.remove('hide');ty.innerHTML='<b>🏅 จำนวนใบที่ถูกรางวัลของแต่ละชุด</b><div class="scroll"><table><tr><th>ชุด</th><th>รางวัลที่ 1</th><th>เลขท้าย 3 ตัว</th><th>เลขท้าย 2 ตัว</th><th>ไม่ถูก</th></tr>'+st.cnt.map((r,s)=>`<tr><td><span style="color:${SETC[s%10]}">●</span> ${s+1}</td>${r.map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')+'</table></div>'}else ty.classList.add('hide');
+ const N=st.N,xs=j=>m+(j/Math.max(1,N-1))*(W-m-14);
+ st.hist.forEach((hs,s)=>{h.strokeStyle=SETC[s%10];h.lineWidth=1.8;h.beginPath();
+  const sk=Math.max(1,Math.floor(hs.length/400));hs.forEach((v,j)=>{if(j%sk&&j!==hs.length-1)return;j?h.lineTo(xs(j),yc(v)):h.moveTo(xs(j),yc(v))});h.stroke()});
+ h.fillStyle='#3b2f6b';h.fillText('ครั้งที่สุ่ม → '+N,W-130,H-10);
+ const fin=st.hist.map(x=>x[x.length-1]);let tc=0;st.cnt.forEach(r=>tc+=r[st.tg]);
+ const F=v=>v<.01?v.toFixed(6):v.toFixed(3);
+ let more='';if(ex==='lot'&&st.tg<3)more=`<br>🎫 ซื้อ ${N} ใบ โอกาสถูกอย่างน้อย 1 ใบ ≈ <b>${((1-Math.pow(1-t,N))*100).toFixed(2)}%</b> (จาก 1 − (1 − P)<sup>${N}</sup>)<br><small>สลากจำลอง: 1 ใบถูกได้อย่างมาก 1 รางวัล</small>`;
+ $('info').innerHTML=`สุ่มแล้ว <b>${st.n}</b>/${N} ครั้ง × ${st.S} ชุด (รวม ${tot} ครั้ง)<br>เหตุการณ์ “${e.o[st.tg]}”: ทฤษฎี P = <b>${e.f[st.tg]} = ${F(t)}</b><br>ผลทดลองรวม = ${tc}/${tot} = <b>${F(tc/tot)}</b><br>แต่ละชุดอยู่ระหว่าง ${F(Math.min(...fin))} ถึง ${F(Math.max(...fin))}${more}`;
+}
+$('tg').addEventListener('change',()=>{if(!timer)draw()});
+$('N').addEventListener('input',()=>lotTip());$('S').addEventListener('input',()=>lotTip());
+function lotTip(){
+ if(ex!=='lot')return;
+ const N=+$('N').value,S=+$('S').value,k=N*S,f=p=>(100*(1-Math.pow(1-p,k))).toFixed(p<1e-4?2:1);
+ $('lotip').innerHTML=`🎫 ซื้อรวม <b>${k.toLocaleString('en')}</b> ใบ (${N.toLocaleString('en')} ใบ × ${S} ชุด)<br>โอกาสถูกอย่างน้อย 1 ใบ → รางวัลที่ 1 ≈ <b>${f(1e-6)}%</b> · เลขท้าย 3 ตัว ≈ <b>${f(.002)}%</b> · เลขท้าย 2 ตัว ≈ <b>${f(.01)}%</b><br><small>ใช้สูตร 1 − (1 − P)<sup>จำนวนใบ</sup> · ต้องซื้อราว 693,000 ใบ รางวัลที่ 1 จึงมีโอกาสประมาณ 50% จึงเห็นว่ารางวัลที่ 1 ยากมาก</small>`;
+}
+function lotMax(){$('N').value=3000;$('S').value=10;$('No').value=3000;$('So').value=10;lotTip()}
+
+/* ---------- quiz ---------- */
+const Q=[
+ {q:'ข้อใดเป็นการทดลองสุ่ม',o:['วัดความสูงของเสาธง','ทอดลูกเต๋า 1 ลูก แล้วดูแต้มที่ขึ้น','ต้มน้ำที่ 100°C','นับจำนวนนักเรียนในห้อง'],a:1,h:'การทดลองสุ่มต้อง “บอกผลล่วงหน้าไม่ได้” แต่รู้ว่าอาจเกิดอะไรได้บ้าง',e:'ทอดลูกเต๋าบอกแต้มล่วงหน้าไม่ได้ แต่รู้ว่าเป็นได้ 1–6 จึงเป็นการทดลองสุ่ม ส่วนข้ออื่นได้ผลที่ตรวจสอบหรือคาดการณ์ได้แน่นอนอยู่แล้ว'},
+ {q:'ทอดลูกเต๋า 1 ลูก 1 ครั้ง ผลลัพธ์ที่เป็นไปได้ทั้งหมดมีกี่แบบ',o:['3','6','12','36'],a:1,h:'ลองนึกถึงจำนวนหน้าของลูกเต๋า',e:'ลูกเต๋ามี 6 หน้า ได้แต้ม 1, 2, 3, 4, 5, 6 จึงมีผลลัพธ์ทั้งหมด 6 แบบ หรือ n(S) = 6'},
+ {q:'ทอดลูกเต๋า 1 ลูก ความน่าจะเป็นที่ได้แต้มคู่ คือข้อใด',o:['1/6','1/3','1/2','2/3'],a:2,h:'แต้มคู่มีแต้มอะไรบ้าง แล้วหารด้วยจำนวนแต้มทั้งหมด',e:'แต้มคู่คือ 2, 4, 6 มี 3 แบบ n(A) = 3 และ n(S) = 6 ดังนั้น P(A) = 3/6 = 1/2'},
+ {q:'โยนเหรียญ 2 เหรียญพร้อมกัน ความน่าจะเป็นที่ได้หัวทั้งสองเหรียญ คือข้อใด',o:['1/2','1/3','1/4','3/4'],a:2,h:'เขียนผลลัพธ์ทั้งหมดของ 2 เหรียญออกมาก่อน (HH, HT, ...)',e:'ผลลัพธ์ทั้งหมดคือ HH, HT, TH, TT มี 4 แบบ ได้หัวทั้งคู่ (HH) แบบเดียว P = 1/4'},
+ {q:'ถุงมีลูกบอลแดง 3 ลูก น้ำเงิน 2 ลูก เหลือง 5 ลูก หยิบ 1 ลูก ความน่าจะเป็นที่ได้ลูกที่ไม่ใช่สีเหลือง คือข้อใด',o:['1/2','1/5','3/10','7/10'],a:0,h:'รวมลูกบอลทั้งหมดก่อน แล้วนับลูกที่ไม่ใช่สีเหลือง',e:'ลูกบอลทั้งหมด 3 + 2 + 5 = 10 ลูก ที่ไม่ใช่สีเหลืองคือ 3 + 2 = 5 ลูก P = 5/10 = 1/2'},
+ {q:'ค่าความน่าจะเป็นของเหตุการณ์ใดๆ ต้องมีค่าอยู่ในช่วงใด',o:['-1 ถึง 1','0 ถึง 1','0 ถึง 100','1 ถึง 10'],a:1,h:'ดูแถบสีเขียว-เหลือง-ชมพูในหน้า 1',e:'0 ≤ P(A) ≤ 1 เสมอ โดย 0 คือเป็นไปไม่ได้ และ 1 คือเกิดขึ้นแน่นอน ความน่าจะเป็นเป็นลบหรือมากกว่า 1 ไม่ได้'},
+ {q:'พยากรณ์อากาศบอกว่า “พรุ่งนี้ฝนตก 30%” ข้อใดเข้าใจถูกต้องที่สุด',o:['ฝนจะตกนาน 30% ของวัน','ฝนจะตก 30% ของพื้นที่ทุกแห่งแน่นอน','ถ้าสภาพอากาศแบบนี้เกิด 100 วัน คาดว่าฝนตกประมาณ 30 วัน','พรุ่งนี้ฝนไม่ตกแน่นอน'],a:2,h:'ความน่าจะเป็นบอกโอกาสในระยะยาวเมื่อสถานการณ์คล้ายกันหลายครั้ง',e:'30% = 30/100 หมายถึงในสถานการณ์ลักษณะเดียวกัน 100 ครั้ง คาดว่าฝนตกประมาณ 30 ครั้ง ไม่ได้แปลว่าตกนาน 30% ของวัน และไม่ได้แปลว่าไม่ตกแน่นอน'},
+ {q:'ทอดลูกเต๋า 1 ลูก 600 ครั้ง คาดว่าจะได้แต้ม 6 ประมาณกี่ครั้ง',o:['60 ครั้ง','100 ครั้ง','200 ครั้ง','300 ครั้ง'],a:1,h:'จำนวนครั้งที่คาดหวัง = จำนวนครั้งที่ทดลอง × P(เหตุการณ์)',e:'P(แต้ม 6) = 1/6 คาดว่าจะได้ 600 × 1/6 = 100 ครั้ง (ผลจริงอาจใกล้เคียง ไม่จำเป็นต้องเท่ากันพอดี)'},
+ {q:'ทอดลูกเต๋า 1 ลูก ความน่าจะเป็นที่ได้แต้มมากกว่า 6 คือข้อใด',o:['0','1/6','1/2','1'],a:0,h:'ลูกเต๋ามีแต้มมากสุดเท่าไร',e:'ไม่มีแต้มที่มากกว่า 6 n(A) = 0 จึงเป็นเหตุการณ์ที่เป็นไปไม่ได้ P = 0/6 = 0'},
+ {q:'จากการทดลองในหน้า 2 เมื่อสุ่มซ้ำจำนวนครั้งมากขึ้นเรื่อยๆ ความถี่สัมพัทธ์จะเป็นอย่างไร',o:['เข้าใกล้ความน่าจะเป็นตามทฤษฎี','ห่างจากความน่าจะเป็นมากขึ้น','เท่ากับ 0 เสมอ','เท่ากับ 1 เสมอ'],a:0,h:'ลองดูเส้นกราฟทุกชุดเทียบกับเส้นประเมื่อเพิ่มจำนวนครั้ง',e:'เมื่อทดลองซ้ำมากขึ้น เส้นกราฟทุกชุดจะนิ่งขึ้นและเข้าใกล้เส้นประ คือค่าความน่าจะเป็นตามทฤษฎี'},
+ {q:'ซื้อสลากกินแบ่ง 1 ใบ ความน่าจะเป็นที่จะถูกรางวัลเลขท้าย 2 ตัว (มี 1 รางวัล) คือข้อใด',o:['1/10','1/100','1/1,000','1/1,000,000'],a:1,h:'เลขท้าย 2 ตัวเป็นได้ตั้งแต่ 00 ถึง 99 มีทั้งหมดกี่แบบ',e:'เลขท้าย 2 ตัวเป็นได้ 00–99 รวม 100 แบบ n(S) = 100 และมีรางวัลเดียว n(A) = 1 ดังนั้น P = 1/100'},
+ {q:'ซื้อสลากกินแบ่ง 1 ใบ ความน่าจะเป็นที่จะถูกรางวัลเลขท้าย 3 ตัว (มี 2 รางวัล) คือข้อใด',o:['1/1,000','2/1,000 = 1/500','1/100','2/100'],a:1,h:'เลขท้าย 3 ตัวมี 000–999 กี่แบบ และมีเลขรางวัลกี่ชุด',e:'เลขท้าย 3 ตัวเป็นได้ 000–999 รวม 1,000 แบบ และออกรางวัล 2 ชุด n(A) = 2 ดังนั้น P = 2/1,000 = 1/500'}
+];
+const QS=()=>db.q&&db.q.length?db.q:Q;
+let hc=0;
+function buildQuiz(){
+ hc=0;window.warned=0;const L=QS();$('qn').textContent=L.length;
+ $('qs').innerHTML=L.map((x,i)=>`<div class="q" id="q${i}"><b>${i+1}. ${esc(x.q)}</b>${x.o.map((o,j)=>`<label><input type="radio" name="r${i}" value="${j}"> ${'กขคง'[j]}. ${esc(o)}</label>`).join('')}${x.h?`<button class="btn y hb" onclick="hint(${i})">💡 ขอคำใบ้</button><div class="hint hide" id="h${i}">💡 ${esc(x.h)}</div>`:''}<div class="exp hide"></div></div>`).join('');
+ $('res').classList.add('hide');
+}
+function hint(i){const d=$('h'+i);if(d.classList.contains('hide')){d.classList.remove('hide');hc++;log(`ขอคำใบ้ข้อ ${i+1}`)}}
+function grade(){
+ const L=QS();let s=0,un=0;
+ L.forEach((x,i)=>{if(!document.querySelector(`input[name=r${i}]:checked`))un++});
+ if(un&&!window.warned){window.warned=1;$('res').classList.remove('hide');$('res').textContent=`ยังไม่ได้ตอบ ${un} ข้อ กด “ส่งคำตอบ” อีกครั้งเพื่อส่งเลย หรือกลับไปตอบให้ครบก่อน`;return}
+ window.warned=0;
+ L.forEach((x,i)=>{
+  const c=document.querySelector(`input[name=r${i}]:checked`),ok=c&&+c.value===x.a;if(ok)s++;
+  const d=$('q'+i);d.classList.remove('ok','no');d.classList.add(ok?'ok':'no');
+  const xe=d.querySelector('.exp');xe.classList.remove('hide');
+  xe.innerHTML=(ok?'✅ ถูกต้อง! ':'❌ เฉลย: ข้อ '+'กขคง'[x.a]+'. '+esc(x.o[x.a])+'<br>')+'<b>อธิบาย:</b> '+esc(x.e||'');
+  d.querySelectorAll('input').forEach(r=>r.disabled=true);
+ });
+ me.sc.push({t:now(),s,n:L.length,h:hc});me.last=now();log(`ส่งแบบฝึกหัด ได้ ${s}/${L.length} (ขอคำใบ้ ${hc} ครั้ง)`);save();
+ const best=Math.max(...me.sc.map(x=>x.s/(x.n||10)));
+ const r=$('res');r.classList.remove('hide');
+ r.innerHTML=`<b>คะแนนครั้งนี้: ${s}/${L.length}</b> ${s/L.length>=.8?'🎉 เก่งมาก!':s/L.length>=.5?'👍 ดีแล้ว ลองอ่านเฉลยข้อที่ผิดนะ':'💪 อ่านเฉลยแล้วกลับไปทดลองอีกรอบ จากนั้นทำใหม่ได้เลย'}<br>ทำแล้ว ${me.sc.length} ครั้ง · สัดส่วนคะแนนสูงสุดของคุณ ${Math.round(best*100)}%`;
+ r.scrollIntoView({behavior:'smooth'});
+}
+
+/* ---------- game ---------- */
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+const fr=(n,d)=>{const g=gcd(n,d)||1;n/=g;d/=g;return d===1?String(n):n.toLocaleString('en')+'/'+d.toLocaleString('en')};
+const rnd=n=>Math.floor(Math.random()*n),pk=a=>a[rnd(a.length)],shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+function mkQ(){
+ const t=rnd(5);let q,vis,n,d,why;
+ if(t===0){const D=[['แต้มคู่',x=>x%2===0],['แต้มคี่',x=>x%2===1],['แต้มมากกว่า 4',x=>x>4],['แต้มน้อยกว่า 3',x=>x<3],['แต้มที่หารด้วย 3 ลงตัว',x=>x%3===0],['แต้มที่เป็นจำนวนเฉพาะ',x=>[2,3,5].includes(x)],['แต้มที่ไม่ใช่ 6',x=>x!==6]],c=pk(D);
+  n=[1,2,3,4,5,6].filter(c[1]).length;d=6;vis='🎲';q=`ทอดลูกเต๋า 1 ลูก 1 ครั้ง ความน่าจะเป็นที่ได้${c[0]} คือเท่าใด`;why=`ผลลัพธ์ทั้งหมด 6 แบบ ได้${c[0]} ${n} แบบ`}
+ else if(t===1){const nm=['แดง','น้ำเงิน','เหลือง'],em=['🔴','🔵','🟡'],a=[1+rnd(5),1+rnd(5),1+rnd(5)],i=rnd(3),not=Math.random()<.4;
+  d=a[0]+a[1]+a[2];n=not?d-a[i]:a[i];vis=a.map((k,j)=>em[j].repeat(k)).join(' ');
+  q=`ในถุงมีลูกบอลสีแดง ${a[0]} ลูก สีน้ำเงิน ${a[1]} ลูก สีเหลือง ${a[2]} ลูก หยิบ 1 ลูก ความน่าจะเป็นที่ได้ลูกบอล${not?'ที่ไม่ใช่':''}สี${nm[i]} คือเท่าใด`;why=`ลูกบอลทั้งหมด ${d} ลูก ${not?'ที่ไม่ใช่':'ที่เป็น'}สี${nm[i]} มี ${n} ลูก`}
+ else if(t===2){const E=[['หัวทั้งสองเหรียญ',1],['ก้อยทั้งสองเหรียญ',1],['หัวอย่างน้อย 1 เหรียญ',3],['หัวพอดี 1 เหรียญ',2],['เหรียญทั้งสองหน้าเหมือนกัน',2]],c=pk(E);
+  n=c[1];d=4;vis='🪙🪙';q=`โยนเหรียญ 2 เหรียญพร้อมกัน ความน่าจะเป็นที่ได้${c[0]} คือเท่าใด`;why=`ผลลัพธ์ทั้งหมด 4 แบบ คือ HH, HT, TH, TT ส่วนที่ได้${c[0]}มี ${n} แบบ`}
+ else if(t===3){const L=[['ถูกรางวัลเลขท้าย 2 ตัว (มี 1 รางวัล)',1,100],['ถูกรางวัลที่ 1 (ตรงทั้ง 6 หลัก)',1,1000000],['ถูกรางวัลเลขท้าย 3 ตัว (มี 2 รางวัล)',2,1000],['ไม่ถูกรางวัลเลขท้าย 2 ตัว',99,100]],c=pk(L);
+  n=c[1];d=c[2];vis='🎫';q=`ซื้อสลาก 1 ใบ ความน่าจะเป็นที่จะ${c[0]} คือเท่าใด (จำลองตามหลักการสลากกินแบ่ง)`;why=`ผลลัพธ์ทั้งหมด ${d.toLocaleString('en')} แบบ ที่ตรงเงื่อนไขมี ${n} แบบ`}
+ else{const C=[['ไพ่โพดำ',13],['ไพ่เอซ',4],['ไพ่สีแดง',26],['ไพ่รูปภาพ (J, Q, K)',12],['ไพ่หัวใจ',13]],c=pk(C);
+  n=c[1];d=52;vis='🃏';q=`หยิบไพ่ 1 ใบจากสำรับมาตรฐาน 52 ใบ ความน่าจะเป็นที่ได้${c[0]} คือเท่าใด`;why=`ไพ่ทั้งหมด 52 ใบ ${c[0]}มี ${n} ใบ`}
+ const ans=fr(n,d),cand=[[d-n,d],[n+1,d],[n,d+1],[n,Math.max(d-1,1)],[1,d],[n*2,d],[Math.max(n-1,1),d]],set=[];
+ cand.forEach(c=>{if(c[0]>=1&&c[0]<c[1]){const f=fr(c[0],c[1]);if(f!==ans&&!set.includes(f))set.push(f)}});
+ let o=shuf(set).slice(0,3);while(o.length<3){const f=fr(1+rnd(d-1),d);if(f!==ans&&!o.includes(f))o.push(f)}
+ o=shuf([ans,...o]);
+ return {q,vis,o,a:o.indexOf(ans),e:`${why} ดังนั้น P = ${n}/${d.toLocaleString('en')} = ${ans}`};
+}
+let G=null,gT=null,gN=null,hold={c:0,t:0};
+function gStop(){clearInterval(gT);clearTimeout(gN);gT=gN=null}
+function gStart(){gStop();G={i:0,s:0,l:3,cb:0,hits:0,q:null,lock:true,tm:0};gNext()}
+function gHud(){$('gprog').textContent=`ด่าน ${G.i}/10`;$('gsc').textContent=G.s;$('glf').textContent='❤️'.repeat(Math.max(0,G.l))||'💔';$('gcb').textContent=G.cb}
+function gNext(){
+ clearTimeout(gN);if(!G)return;
+ if(G.i>=10||G.l<=0)return gEnd();
+ G.i++;G.q=mkQ();G.lock=false;G.tm=20;
+ $('gq').textContent=G.q.q;$('gv').textContent=G.q.vis;
+ $('go').innerHTML=G.q.o.map((o,i)=>`<button class="gopt" id="go${i}" onclick="gAns(${i})"><b>${'กขคง'[i]}.</b> ${o}</button>`).join('');
+ $('gm').classList.add('hide');gHud();
+ clearInterval(gT);gT=setInterval(()=>{G.tm-=.1;$('tfill').style.width=Math.max(0,G.tm/20*100)+'%';if(G.tm<=0){clearInterval(gT);gAns(-1)}},100);
+}
+function gAns(i){
+ if(!G||G.lock)return;G.lock=true;clearInterval(gT);hold.c=0;
+ const ok=i===G.q.a;
+ if(ok){G.cb++;G.hits++;G.s+=10+Math.round(Math.max(0,G.tm)/2)+Math.min(G.cb,5)*2}else{G.l--;G.cb=0}
+ [...$('go').children].forEach((b,j)=>{b.disabled=true;b.classList.remove('hov');if(j===G.q.a)b.classList.add('right');else if(j===i)b.classList.add('wrong')});
+ const m=$('gm');m.classList.remove('hide');
+ m.innerHTML=(ok?'🎉 ถูกต้อง! ':i<0?'⏰ หมดเวลา! ':'😢 ยังไม่ถูก ')+'<br>'+esc(G.q.e)+'<br><button class="btn g" onclick="gNext()">ข้อต่อไป ▶</button>';
+ gHud();gN=setTimeout(gNext,6000);
+}
+function gEnd(){
+ gStop();const hs=Math.max(0,...me.game.map(x=>x.s));
+ me.game.push({t:now(),s:G.s,ok:G.hits});me.last=now();log(`เล่นเกม ได้ ${G.s} คะแนน (ตอบถูก ${G.hits}/${G.i})`);save();
+ $('gq').textContent=`จบเกม! 🎊 ได้ ${G.s} คะแนน`;$('gv').textContent=G.s>hs?'🏆':'🌟';$('go').innerHTML='';
+ const m=$('gm');m.classList.remove('hide');m.innerHTML=`ตอบถูก ${G.hits} ข้อ จาก ${G.i} ข้อ ${G.s>hs?'— สถิติใหม่ของคุณ!':''}<br>กด “เริ่มเกม” เพื่อเล่นอีกครั้ง`;
+ G=null;gBest();
+}
+function gBest(){const g=(me&&me.game)||[],f=(me&&me.farm)||[];$('gbest').innerHTML=`🥬 เกมแปลงผัก: `+(f.length?`เล่นแล้ว ${f.length} ครั้ง · สูงสุด <b>${Math.max(...f.map(x=>x.s))}</b>`:'ยังไม่เคยเล่น')+`<br>⏱ เกมด่าน: `+(g.length?`เล่นแล้ว ${g.length} ครั้ง · สูงสุด <b>${Math.max(...g.map(x=>x.s))}</b>`:'ยังไม่เคยเล่น')}
+
+/* ---------- เกมแปลงผักพอเพียง (ตัวละครเดินได้จริง) ---------- */
+const FS=6,CW=640,CH=400,SP=150;
+const SD=[
+ {ic:'🥬',nm:'ผักบุ้ง',n:9,d:10,cost:2,price:6},
+ {ic:'🍅',nm:'มะเขือเทศ',n:7,d:10,cost:3,price:9},
+ {ic:'🌶️',nm:'พริก',n:2,d:5,cost:4,price:20}
+];
+const ZN={
+ home:{x:70,y:70,r:40,ic:'🏡',nm:'บ้าน'},
+ shop:{x:250,y:58,r:38,ic:'🏪',nm:'ร้านเมล็ดพันธุ์'},
+ pond:{x:565,y:72,r:46,ic:'',nm:'สระน้ำ'},
+ barn:{x:70,y:340,r:40,ic:'🛖',nm:'ยุ้งฉางชุมชน'},
+ mkt:{x:565,y:335,r:40,ic:'🧺',nm:'ตลาด'}
+};
+const PC=[[230,190],[320,190],[410,190],[230,280],[320,280],[410,280]];
+const RAINS=[1,2,3,5,7,8];
+const FINTRO=`<b>🥬 แปลงผักพอเพียง ตามรอยพ่อหลวง</b><br>คุณคือเกษตรกร ${FS} วัน เดินพาตัวละคร 🧑‍🌾 ไปตามสถานที่ต่างๆ ได้จริง:<br>
+① 🏪 <b>ร้านเมล็ดพันธุ์</b> ซื้อเมล็ด (ดูความน่าจะเป็นที่จะงอก) ② 💧 <b>สระน้ำ</b> ตักน้ำ ③ 🟫 <b>แปลงผัก</b> เดินทับเพื่อหยอดเมล็ด / รดน้ำ / เก็บผัก ④ 🏡 <b>บ้าน</b> นอนพัก แล้วลุ้นว่าฝนตกไหม เมล็ดไหนงอก ⑤ 🧺 <b>ตลาด</b> ขายผัก · 🛖 <b>ยุ้งฉาง</b> แบ่งปันผักให้ชุมชน (+⭐)<br>
+<b>วิธีเดิน:</b> ปุ่มลูกศร / WASD · ปุ่มลูกศรบนจอ · แตะที่แผนที่ · หรือเปิดกล้อง 📷 แล้วขยับมือไปทางที่อยากเดิน (มืออยู่กลางภาพ = หยุด)<br>
+<small>เมื่อมีหน้าต่างให้เลือก คลิกได้เลย หรือชูนิ้ว 1–4 ค้างไว้ประมาณ 1 วินาที · ถ้าจะซื้อ/ทำซ้ำที่เดิม ให้ก้าวออกแล้วเดินเข้าใหม่<br>🌿 พ่อหลวง ร.9 ทรงสอนให้ตัดสินใจอย่าง <b>พอประมาณ มีเหตุผล มีภูมิคุ้มกัน</b> ผักที่งอกง่ายขายได้น้อย ผักที่งอกยากขายได้แพง ลองคิดดูว่าแบบไหนคุ้มที่สุด (ทฤษฎีใหม่ 30:30:30:10 = สระน้ำ · นา · พืชสวน · ที่อยู่อาศัย)</small>`;
+let F=null,gmode='farm',raf=0,lt=0;
+const KEYS={},H={on:0,vx:0,vy:0,t:0};
+const KM={ArrowLeft:'L',a:'L',A:'L',ArrowRight:'R',d:'R',D:'R',ArrowUp:'U',w:'U',W:'U',ArrowDown:'D',s:'D',S:'D'};
+function fNew(){return{d:1,c:30,v:0,sd:[0,0,0],cur:0,w:0,h:[0,0,0],p:PC.map(()=>({s:0,t:-1,w:0})),x:160,y:215,fl:1,mv:0,tx:null,ty:null,st:SD.map(()=>({ok:0,tot:0})),rn:pk(RAINS),ph:'idle',panel:null,inz:null,don:0,toast:null}}
+function fMsgSet(h){const m=$('fm');m.classList.remove('hide');m.innerHTML=h}
+function say(t,s){if(!F)return;$('ft').textContent='📣 '+t;F.toast={t:s||t,u:performance.now()+2800}}
+function fReset(){
+ F=null;cancelAnimationFrame(raf);raf=0;$('fpanel').classList.add('hide');
+ $('fprog').textContent='วันที่ 0/'+FS;$('fsc').textContent=30;$('fbd').textContent='⭐ น้ำใจ 0';
+ $('fwx').innerHTML='กด “เริ่มเกมแปลงผัก” เพื่อเริ่มเดินในแปลงผัก';$('ft').textContent='';
+ fMsgSet(FINTRO);fDraw(fNew(),0);
+}
+function fHud(){
+ $('fprog').textContent=`วันที่ ${Math.min(F.d,FS)}/${FS}`;$('fsc').textContent=F.c;$('fbd').textContent=`⭐ น้ำใจ ${F.v}`;
+ const sd=SD.map((s,i)=>F.sd[i]?s.ic+'×'+F.sd[i]:'').filter(Boolean).join(' ')||'ไม่มี';
+ $('fwx').innerHTML=`🌦️ <b>พยากรณ์คืนนี้:</b> ฝนตก ${F.rn}/10 = ${F.rn*10}% ${'🌧️'.repeat(F.rn)}${'☀️'.repeat(10-F.rn)}<br>🎒 เมล็ด: ${sd} · 💧 น้ำ: ${F.w} ครั้ง · 🧺 ผักที่เก็บแล้ว: ${SD.map((s,i)=>s.ic+'×'+F.h[i]).join(' ')}`;
+}
+function fStart(){
+ F=fNew();F.ph='play';cancelAnimationFrame(raf);$('fpanel').classList.add('hide');
+ fMsgSet('<b>วันที่ 1 เริ่มแล้ว!</b> เดินไป 🏪 ร้านเมล็ดพันธุ์ (ข้างบน) เพื่อซื้อเมล็ด แล้วไป 💧 สระน้ำ จากนั้นเดินทับแปลงผักเพื่อปลูก');
+ fHud();say('เริ่มเกม! เดินไปร้านเมล็ดพันธุ์ก่อนนะ','🧑‍🌾 ไปร้านเมล็ดพันธุ์!');
+ log('เริ่มเกมแปลงผัก');lt=performance.now();raf=requestAnimationFrame(fLoop);
+}
+function fPanel(q,opts,cb){
+ F.panel={opts,cb};hold.c=0;clr();$('fq').textContent=q;
+ $('fo').innerHTML=opts.map((o,i)=>`<button class="gopt" id="fo${i}" onclick="fPick(${i})"><b>${i+1}.</b> ${o}</button>`).join('');
+ $('fpanel').classList.remove('hide');$('fpanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function fPick(i){
+ if(!F||!F.panel)return;const p=F.panel;F.panel=null;
+ $('fpanel').classList.add('hide');hold.c=0;clr();p.cb(i);
+}
+function fEnter(z){
+ if(z==='home')return fPanel(`🏡 นอนพักจบวันที่ ${F.d} เลยไหม? พอตื่นเช้าจะรู้ว่าฝนตกไหม และเมล็ดไหนงอก`,['😴 นอนเลย','🚶 ยังก่อน ขอทำงานต่อ'],i=>{if(i===0)fNight()});
+ if(z==='shop')return fPanel('🏪 ซื้อเมล็ดพันธุ์ (1 ห่อ = 3 เมล็ด) เลือกชนิดผัก',[...SD.map(s=>`${s.ic} ${s.nm}<small>งอก ${s.n}/${s.d} = ${s.n*100/s.d}% · ห่อละ ${s.cost*3} บาท · ขายต้นละ ${s.price} บาท</small>`),'🚶 ไว้ก่อน'],i=>{
+  if(i>=SD.length)return;const s=SD[i],pr=s.cost*3;
+  if(F.c<pr){say('เงินไม่พอซื้อห่อนี้ 😅 ลองเก็บผักไปขายที่ตลาดก่อน','💸 เงินไม่พอ');return}
+  F.c-=pr;F.sd[i]+=3;F.cur=i;say(`ซื้อเมล็ด${s.nm} 3 เมล็ด (-${pr} บาท)`,`🎒 ได้เมล็ด${s.nm} ×3`);fHud()});
+ if(z==='pond'){F.w=3;say('ตักน้ำเต็มถังแล้ว ใช้รดน้ำได้ 3 แปลง','💧 ตักน้ำเต็ม ×3');return fHud()}
+ if(z==='mkt'){
+  const n=F.h.reduce((a,b)=>a+b,0);if(!n)return say('ยังไม่มีผักให้ขาย ไปเก็บจากแปลงก่อนนะ','🧺 ยังไม่มีผัก');
+  const tot=F.h.reduce((a,k,i)=>a+k*SD[i].price,0);F.c+=tot;F.h=[0,0,0];say(`ขายผัก ${n} ต้น ได้เงิน ${tot} บาท 🎉`,`💰 ขายได้ ${tot} บาท`);return fHud()}
+ if(z==='barn'){
+  const i=F.h.findIndex(k=>k>0);if(i<0)return say('ยังไม่มีผักให้แบ่งปัน','🛖 ยังไม่มีผัก');
+  F.h[i]--;F.v+=8;F.don++;say(`แบ่งปัน${SD[i].nm}ให้ชุมชน ได้ +8 ⭐ น้ำใจ`,'💛 แบ่งปัน +8 ⭐');return fHud()}
+ const p=F.p[+z.slice(1)],m=[];
+ if(p.s===2){F.h[p.t]++;m.push(`🧺 เก็บ${SD[p.t].nm} 1 ต้น`);p.s=0;p.t=-1;p.w=0}
+ else{
+  if(p.s===0){
+   const t=F.sd[F.cur]>0?F.cur:F.sd.findIndex(k=>k>0);
+   if(t<0)return say('ยังไม่มีเมล็ดพันธุ์ ไปซื้อที่ร้านก่อนนะ','🌰 ยังไม่มีเมล็ด');
+   F.sd[t]--;p.s=1;p.t=t;p.w=0;m.push(`🌰 หยอดเมล็ด${SD[t].nm}`)}
+  if(p.s===1&&!p.w){if(F.w>0){F.w--;p.w=1;m.push(`💧 รดน้ำแล้ว (เหลือน้ำ ${F.w})`)}else m.push('🪣 ยังไม่ได้รดน้ำ ไปตักน้ำที่สระ แล้วกลับมาเดินทับแปลงนี้')}
+  else if(p.s===1&&p.w&&!m.length)m.push('💧 แปลงนี้รดน้ำแล้ว')}
+ say(m.join(' · '));fHud();
+}
+function fNight(){
+ const rain=Math.random()<F.rn/10,fc=F.rn;let ok=0,bad=0,dry=0;
+ F.p.forEach(p=>{
+  if(p.s===1){
+   if(p.w||rain){const s=SD[p.t],g=Math.random()<s.n/s.d;F.st[p.t].tot++;if(g){F.st[p.t].ok++;p.s=2;ok++}else{p.s=0;p.t=-1;bad++}}
+   else{p.s=0;p.t=-1;dry++}}
+  p.w=0});
+ const ln=SD.map((s,i)=>F.st[i].tot?`${s.ic} ${s.nm}: งอก ${F.st[i].ok}/${F.st[i].tot} = ${Math.round(F.st[i].ok/F.st[i].tot*100)}% (ทฤษฎี ${s.n*100/s.d}%)`:'').filter(Boolean).join('<br>');
+ let rep=`🌙 <b>ผ่านไป 1 คืน (จบวันที่ ${F.d})</b><br>${rain?'🌧️ ฝนตกจริง!':'☀️ ฝนไม่ตก'} (พยากรณ์ไว้ ${fc}/10) · 🌱 งอก <b>${ok}</b> · 😢 ไม่งอก <b>${bad}</b> · 🥀 แห้งตายเพราะไม่ได้รดน้ำ <b>${dry}</b><br><b>📈 ความถี่สัมพัทธ์ของการงอกจริง (สะสม)</b><br>${ln||'ยังไม่มีเมล็ดที่ถูกทดสอบ'}`;
+ F.d++;F.rn=pk(RAINS);F.x=115;F.y=150;F.inz=null;F.tx=null;
+ if(F.d>FS)return fEnd(rep);
+ fMsgSet(rep+`<br>☀️ <b>เช้าวันที่ ${F.d}:</b> เดินทับแปลงที่โตแล้วเพื่อเก็บผัก แล้วนำไปขายที่ 🧺 ตลาด`);fHud();say(`เช้าวันที่ ${F.d} แล้ว!`,`☀️ เช้าวันที่ ${F.d}`);
+}
+function fEnd(rep){
+ me.farm=me.farm||[];const best=Math.max(0,...me.farm.map(x=>x.s)),tot=F.c+F.v,left=F.h.reduce((a,b)=>a+b,0);
+ const ttl=tot>=140?'🏆 เกษตรกรพอเพียงต้นแบบ':tot>=90?'🌟 เกษตรกรผู้รอบคอบ':'🌱 เกษตรกรผู้กำลังเรียนรู้';
+ me.farm.push({t:now(),s:tot,c:F.c,v:F.v,sh:F.don});me.last=now();
+ log(`เล่นเกมแปลงผัก ได้ ${tot} คะแนน (เงิน ${F.c}, น้ำใจ ${F.v}, แบ่งปัน ${F.don} ต้น)`);save();
+ F.ph='end';F.panel=null;$('fpanel').classList.add('hide');fHud();
+ $('fprog').textContent=`ครบ ${FS}/${FS} วัน`;say(`จบเกม! ${ttl}`,'🎊 จบเกม!');
+ fMsgSet(`<b>🎊 จบเกม! ${ttl}</b><br>💰 เงิน ${F.c} บาท + ⭐ น้ำใจ ${F.v} = <b>${tot} คะแนน</b>${tot>best?' — สถิติใหม่ของคุณ!':''}${left?`<br><small>ยังเหลือผักที่ไม่ได้ขาย ${left} ต้น</small>`:''}<hr>${rep}<hr>พ่อหลวง ร.9 ทรงงานเพื่อความสุขของประชาชน ปรัชญาของเศรษฐกิจพอเพียงใช้ได้กับทุกคน ส่วน ร.10 ทรง “สืบสาน รักษา ต่อยอด” พระราชกรณียกิจ เราร่วมสืบสานได้ด้วยการเรียนรู้ ทำหน้าที่ของตน และมีน้ำใจต่อกัน 💛<br>กด “เริ่มเกมแปลงผัก” เพื่อเล่นอีกครั้ง`);
+ gBest();
+}
+function fZones(){
+ let z=null;
+ for(const k in ZN){const a=ZN[k];if(Math.hypot(F.x-a.x,F.y-a.y)<a.r){z=k;break}}
+ if(!z)for(let i=0;i<PC.length;i++){if(Math.abs(F.x-PC[i][0])<38&&Math.abs(F.y-PC[i][1])<38){z='p'+i;break}}
+ if(z!==F.inz){F.inz=z;if(z)fEnter(z)}
+}
+function fStep(dt){
+ let vx=0,vy=0;
+ if(F.ph==='play'&&!F.panel){
+  if(KEYS.L)vx--;if(KEYS.R)vx++;if(KEYS.U)vy--;if(KEYS.D)vy++;
+  if(!vx&&!vy&&H.on&&performance.now()-H.t<600){vx=H.vx;vy=H.vy}
+  if(!vx&&!vy&&F.tx!=null){const dx=F.tx-F.x,dy=F.ty-F.y,d=Math.hypot(dx,dy);if(d<6)F.tx=null;else{vx=dx/d;vy=dy/d}}
+ }
+ const L=Math.hypot(vx,vy);if(L>1){vx/=L;vy/=L}
+ F.mv=L>.05;
+ if(F.mv){F.x=Math.max(22,Math.min(CW-22,F.x+vx*SP*dt));F.y=Math.max(30,Math.min(CH-16,F.y+vy*SP*dt));if(vx)F.fl=vx<0?-1:1;fZones()}
+}
+function fLoop(t){
+ if(!F){raf=0;return}
+ if(F.ph==='end'){fDraw(F,t);raf=0;return}
+ const dt=Math.min(.05,Math.max(0,(t-lt)/1000));lt=t;fStep(dt);fDraw(F,t);raf=requestAnimationFrame(fLoop);
+}
+function rr(c,x,y,w,h,r){c.beginPath();if(c.roundRect)c.roundRect(x,y,w,h,r);else c.rect(x,y,w,h)}
+function fDraw(s,t){
+ const c=$('gc').getContext('2d');c.clearRect(0,0,CW,CH);
+ const g=c.createLinearGradient(0,0,0,CH);g.addColorStop(0,'#bdeea4');g.addColorStop(1,'#8fd98a');c.fillStyle=g;c.fillRect(0,0,CW,CH);
+ c.textAlign='center';c.textBaseline='middle';
+ c.globalAlpha=.55;c.font='18px serif';[[30,160],[140,100],[500,160],[610,250],[35,260],[520,385],[200,380],[380,105],[610,190],[300,378]].forEach(a=>c.fillText('🌿',a[0],a[1]));c.globalAlpha=1;
+ c.strokeStyle='#efd9a3';c.lineWidth=24;c.lineCap='round';c.lineJoin='round';
+ c.beginPath();c.moveTo(70,70);c.lineTo(70,350);c.lineTo(565,350);c.lineTo(565,72);c.moveTo(565,120);c.lineTo(70,120);c.moveTo(250,58);c.lineTo(250,120);c.stroke();
+ c.fillStyle='#6ec6ff';c.strokeStyle='#fff';c.lineWidth=4;c.beginPath();c.ellipse(565,72,64,42,0,0,7);c.fill();c.stroke();
+ c.strokeStyle='rgba(255,255,255,.75)';c.lineWidth=2;c.beginPath();c.ellipse(565,72,42,24,0,0,3.6);c.stroke();
+ c.font='26px serif';c.fillText('🐟',540+Math.sin(t/700)*8,64);
+ for(const k in ZN){const a=ZN[k],oy=k==='pond'?24:42;
+  if(a.ic){c.font='56px serif';c.fillText(a.ic,a.x,a.y)}
+  c.font="700 19px Mali,Tahoma,sans-serif";c.lineWidth=5;c.strokeStyle='#fff';c.strokeText(a.nm,a.x,a.y+oy);c.fillStyle='#3b2f6b';c.fillText(a.nm,a.x,a.y+oy)}
+ c.font="700 19px Mali,Tahoma,sans-serif";c.lineWidth=4;c.strokeStyle='#fff';c.strokeText('แปลงผัก',320,138);c.fillStyle='#3b2f6b';c.fillText('แปลงผัก',320,138);
+ PC.forEach((q,i)=>{const p=s.p[i];
+  c.fillStyle=p.w?'#5e3b27':'#9a6a45';rr(c,q[0]-39,q[1]-39,78,78,10);c.fill();c.strokeStyle='#6b4429';c.lineWidth=3;c.stroke();
+  c.strokeStyle='rgba(0,0,0,.18)';c.lineWidth=2;for(let k=-1;k<=1;k++){c.beginPath();c.moveTo(q[0]-30,q[1]+k*22);c.lineTo(q[0]+30,q[1]+k*22);c.stroke()}
+  if(p.s===1){c.font='34px serif';c.fillText('🌰',q[0],q[1]);if(p.w){c.font='24px serif';c.fillText('💧',q[0]+24,q[1]-24)}}
+  else if(p.s===2){c.font=(52*(1+Math.sin(t/300+i)*.06))+'px serif';c.fillText(SD[p.t].ic,q[0],q[1])}});
+ const by=s.mv?Math.sin(t/70)*3:0;
+ c.fillStyle='rgba(0,0,0,.18)';c.beginPath();c.ellipse(s.x,s.y+21,19,7,0,0,7);c.fill();
+ c.save();c.translate(s.x,s.y+by);c.scale(s.fl,1);c.font='50px serif';c.fillText('🧑‍🌾',0,0);c.restore();
+ if(s.toast&&t<s.toast.u){
+  c.font="700 19px Mali,Tahoma,sans-serif";const w=Math.min(CW-16,c.measureText(s.toast.t).width+22),x=Math.max(w/2+8,Math.min(CW-w/2-8,s.x)),y=s.y-52<26?s.y+52:s.y-52;
+  c.fillStyle='#fff9d6';c.strokeStyle='#ffd23c';c.lineWidth=3;rr(c,x-w/2,y-18,w,36,14);c.fill();c.stroke();c.fillStyle='#3b2f6b';c.fillText(s.toast.t,x,y,w-14)}
+}
+function fHand(L,n,th){
+ if(!F||F.ph!=='play'){H.on=0;$('fc').textContent='กด “เริ่มเกมแปลงผัก” ก่อนนะ';return}
+ if(F.panel){
+  H.on=0;const k=F.panel.opts.length,key=n>=1&&n<=k?n:0;
+  $('fc').textContent=key?`ชูอยู่ ${n} นิ้ว → เลือกข้อ ${n}`:`ชูนิ้ว 1–${k} ค้างไว้เพื่อเลือก`;
+  if(!key){hold.c=0;clr();return}
+  const t=performance.now();if(hold.c!==key)hold={c:key,t};
+  clr();const b=$('fo'+(key-1));if(b)b.classList.add('hov');
+  if(t-hold.t>1100){hold.c=0;fPick(key-1)}
+  return;
+ }
+ const p=L[9],dx=.5-p.x,dy=p.y-.5,Z=.1,cl=v=>Math.max(-1,Math.min(1,v/.3));
+ const vx=Math.abs(dx)>Z?cl(dx):0,vy=Math.abs(dy)>Z?cl(dy):0;
+ H.on=1;H.vx=vx;H.vy=vy;H.t=performance.now();hold.c=0;clr();
+ $('fc').textContent=(vx||vy)?`🖐 เดิน ${vy<0?'⬆️':vy>0?'⬇️':''}${vx<0?'⬅️':vx>0?'➡️':''}`:'🖐 มืออยู่กลางภาพ = หยุดเดิน';
+}
+addEventListener('keydown',e=>{
+ if(!F||gmode!=='farm'||F.ph!=='play'||$('game').classList.contains('hide')||$('app').classList.contains('hide'))return;
+ if(F.panel&&/^[1-4]$/.test(e.key)){const i=+e.key-1;if(i<F.panel.opts.length){e.preventDefault();fPick(i)}return}
+ const d=KM[e.key];if(!d)return;e.preventDefault();KEYS[d]=1;F.tx=null;
+});
+addEventListener('keyup',e=>{const d=KM[e.key];if(d)KEYS[d]=0});
+addEventListener('blur',()=>{for(const k in KEYS)KEYS[k]=0});
+document.querySelectorAll('.dpad button').forEach(b=>{
+ const d=b.dataset.d;
+ b.addEventListener('pointerdown',e=>{e.preventDefault();KEYS[d]=1;if(F)F.tx=null});
+ ['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>{KEYS[d]=0}));
+});
+$('gc').addEventListener('pointerdown',e=>{
+ if(!F||F.ph!=='play'||F.panel)return;
+ const r=$('gc').getBoundingClientRect();F.tx=(e.clientX-r.left)*CW/r.width;F.ty=(e.clientY-r.top)*CH/r.height;
+});
+function gSel(m){
+ gmode=m;gStop();G=null;F=null;hold.c=0;clr();
+ $('farmBox').classList.toggle('hide',m!=='farm');$('qgBox').classList.toggle('hide',m!=='quiz');
+ document.querySelectorAll('.gtabs .btn').forEach(b=>b.classList.toggle('on',b.dataset.g===m));
+ if(m==='farm')fReset();
+ else{$('gprog').textContent='ด่าน 0/10';$('gsc').textContent=0;$('glf').textContent='❤️❤️❤️';$('gcb').textContent=0;$('tfill').style.width='100%';
+  $('gq').textContent='กด “เริ่มเกม” เพื่อเล่น';$('gv').textContent='🎲🪙🎫';$('go').innerHTML='';$('gm').classList.add('hide')}
+ gBest();
+}
+function gSlot(){
+ if(gmode==='farm')return null;
+ if(!G)return null;if(!G.lock)return 'pick';return G.q?'next':null;
+}
+
+/* ---------- MediaPipe Hands ---------- */
+let hands=null,camOn=false,stream=null;
+const clr=()=>document.querySelectorAll('.gopt.hov').forEach(b=>b.classList.remove('hov'));
+const loadScript=src=>new Promise((ok,no)=>{const e=document.createElement('script');e.src=src;e.onload=ok;e.onerror=no;document.head.appendChild(e)});
+const MP='https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/';
+async function toggleCam(){
+ if(camOn){stopCam();return}
+ $('camt').textContent='กำลังเปิดกล้องและโหลด MediaPipe...';
+ try{
+  stream=await navigator.mediaDevices.getUserMedia({video:{width:320,height:240,facingMode:'user'}});
+  const v=$('vid');v.srcObject=stream;await v.play();
+  if(!window.Hands)await loadScript(MP+'hands.js');
+  if(!hands){hands=new Hands({locateFile:f=>MP+f});hands.setOptions({maxNumHands:1,modelComplexity:0,minDetectionConfidence:.6,minTrackingConfidence:.5});hands.onResults(onHand)}
+  camOn=true;$('camb').textContent='⏹ ปิดกล้อง';$('fc').textContent='ยกมือให้กล้องเห็น 🖐';
+  $('camt').textContent=gmode==='farm'?'กล้องพร้อมแล้ว! 🖐 ขยับมือไปทางที่อยากเดิน (มืออยู่กลางภาพ = หยุด) · เมื่อมีหน้าต่างให้เลือก ชูนิ้ว 1–4 ค้างไว้ประมาณ 1 วินาที':'กล้องพร้อมแล้ว! ชูนิ้ว 1–4 แล้วค้างไว้ประมาณ 1 วินาทีเพื่อตอบ';
+  camLoop();
+ }catch(e){stopCam();$('camt').textContent='เปิดกล้องหรือโหลด MediaPipe ไม่สำเร็จ (ตรวจสอบสิทธิ์กล้องและอินเทอร์เน็ต) เล่นด้วยการคลิก/แตะแทนได้';}
+}
+async function camLoop(){if(!camOn)return;try{await hands.send({image:$('vid')})}catch(e){}requestAnimationFrame(camLoop)}
+function stopCam(){camOn=false;H.on=0;if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}$('vid').srcObject=null;$('camb').textContent='📷 เปิดกล้อง';$('fc').textContent='กล้องปิดอยู่';$('ov').getContext('2d').clearRect(0,0,320,240);clr()}
+function onHand(r){
+ const c=$('ov').getContext('2d');c.clearRect(0,0,320,240);
+ const L=r.multiHandLandmarks&&r.multiHandLandmarks[0];
+ if(!L){H.on=0;$('fc').textContent='ไม่พบมือ ยกมือให้กล้องเห็น 🖐';hold.c=0;clr();return}
+ c.fillStyle='#ff6fae';L.forEach(p=>{c.beginPath();c.arc(p.x*320,p.y*240,4,0,7);c.fill()});
+ const w=L[0],d=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);let n=0;
+ [[8,6],[12,10],[16,14],[20,18]].forEach(([t,p])=>{if(d(L[t],w)>d(L[p],w)*1.05)n++});
+ const th=n===0&&L[4].y<L[3].y&&L[3].y<L[2].y&&L[4].y<L[5].y-.05;
+ if(gmode==='farm'){fHand(L,n,th);return}
+ $('fc').textContent=th?'👍 ยกนิ้วโป้ง → ไปต่อ':`ชูอยู่ ${n} นิ้ว`+(n>=1&&n<=4?` → ตอบข้อ ${'กขคง'[n-1]}`:'');
+ const sl=gSlot(),key=th?'up':(n>=1&&n<=4?n:0);
+ if(!sl||!key||(sl==='pick'&&key==='up')||(sl==='next'&&key!=='up')){hold.c=0;clr();return}
+ const t=performance.now();if(hold.c!==key)hold={c:key,t};
+ clr();
+ if(sl==='pick'){const b=$((gmode==='farm'?'fo':'go')+(key-1));if(b)b.classList.add('hov')}
+ if(t-hold.t>1100){hold.c=0;if(sl==='pick'){if(gmode==='farm')fAns(key-1);else gAns(key-1)}else{if(gmode==='farm')fGo();else gNext()}}
+}
+
+/* ---------- teacher + export ---------- */
+function rows(only){
+ const us=Object.values(db.u).filter(u=>!only||(me&&u.key===me.key));
+ return us.map(u=>{const sc=u.sc||[],g=u.game||[];
+  const best=sc.reduce((a,x)=>(!a||x.s/(x.n||10)>a.s/(a.n||10))?x:a,null),l=sc[sc.length-1];
+  return [u.name,u.cls,u.login,u.exp,sc.length,best?best.s+'/'+(best.n||10):'-',l?l.s+'/'+(l.n||10):'-',g.length,g.length?Math.max(...g.map(x=>x.s)):'-',(u.farm||[]).length,(u.farm||[]).length?Math.max(...u.farm.map(x=>x.s)):'-',u.last||'-']});
+}
+const H1=['ชื่อ-นามสกุล','ห้อง/เลขที่','เข้าสู่ระบบ (ครั้ง)','ทดลอง (ครั้ง)','ทำแบบฝึกหัด (ครั้ง)','คะแนนแบบฝึกหัดสูงสุด','คะแนนล่าสุด','เล่นเกมด่าน (ครั้ง)','คะแนนเกมด่านสูงสุด','เล่นเกมฟาร์ม (ครั้ง)','คะแนนฟาร์มสูงสุด','ใช้งานล่าสุด'];
+const tbl=(h,r)=>`<table border="1"><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${r.map(x=>`<tr>${x.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table>`;
+function renderT(){
+ const r=rows(false);
+ $('tsum').innerHTML=r.length?tbl(H1,r):'ยังไม่มีนักเรียนเข้าใช้งานบนเครื่องนี้';
+ $('tlog').innerHTML=db.l.length?tbl(['เวลา','ผู้ใช้','กิจกรรม'],db.l.slice(-60).reverse().map(x=>[x.t,x.u,x.a])):'ยังไม่มีบันทึก';
+}
+function xls(only){
+ const lg=db.l.filter(x=>!only||(me&&x.u===me.key)).map(x=>[x.t,x.u,x.a]);
+ const sc=[];Object.values(db.u).filter(u=>!only||(me&&u.key===me.key)).forEach(u=>u.sc.forEach((x,i)=>sc.push([u.name,u.cls,i+1,x.s,x.n||10,x.h||0,x.t])));
+ const html=`<html xmlns:x="urn:schemas-microsoft-com:office:excel"><head><meta charset="utf-8"></head><body><h3>สรุปคะแนน</h3>${tbl(H1,rows(only))}<h3>ประวัติการทำแบบทดสอบ</h3>${tbl(['ชื่อ','ห้อง/เลขที่','ครั้งที่','คะแนน','คะแนนเต็ม','ขอคำใบ้ (ครั้ง)','เวลา'],sc)}<h3>บันทึกการใช้งาน</h3>${tbl(['เวลา','ผู้ใช้','กิจกรรม'],lg)}</body></html>`;
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+html],{type:'application/vnd.ms-excel;charset=utf-8'}));
+ a.download='probability_'+(only?'my':'all')+'_scores.xls';document.body.appendChild(a);a.click();a.remove();
+ if(me)log('ดาวน์โหลดไฟล์ Excel');
+}
+function clearAll(){
+ const b=event.target;
+ if(b.dataset.s!=='1'){b.dataset.s='1';b.textContent='กดอีกครั้งเพื่อยืนยันลบ';setTimeout(()=>{b.dataset.s='';b.textContent='ล้างข้อมูล'},4000);return}
+ b.dataset.s='';b.textContent='ล้างข้อมูล';db={u:{},l:[]};save();renderT();
+}
+
+/* ---------- teacher: edit exercises ---------- */
+let EQ=[];
+function tTab(t){$('tscore').classList.toggle('hide',t!=='s');$('tedit').classList.toggle('hide',t!=='e');if(t==='e'){EQ=JSON.parse(JSON.stringify(QS()));drawE();$('emsg').classList.add('hide')}else renderT()}
+function drawE(){
+ $('elist').innerHTML=EQ.map((x,i)=>`<div class="q"><b>ข้อ ${i+1}</b> <button class="btn hb" onclick="delQ(${i})">🗑 ลบข้อนี้</button>
+ <label>โจทย์</label><textarea id="eq${i}" rows="2">${esc(x.q)}</textarea>
+ ${[0,1,2,3].map(j=>`<div class="er"><input type="radio" name="ea${i}" value="${j}" ${x.a===j?'checked':''} aria-label="คำตอบถูกคือข้อ ${'กขคง'[j]}"><b>${'กขคง'[j]}.</b><input type="text" id="eo${i}_${j}" value="${esc(x.o[j]||'')}"></div>`).join('')}
+ <label>คำใบ้ (เว้นว่างได้)</label><input type="text" id="eh${i}" value="${esc(x.h||'')}">
+ <label>คำอธิบายเฉลย</label><textarea id="ee${i}" rows="2">${esc(x.e||'')}</textarea></div>`).join('');
+}
+function collectE(){EQ=EQ.map((x,i)=>({q:$('eq'+i).value.trim(),o:[0,1,2,3].map(j=>$('eo'+i+'_'+j).value.trim()),a:+((document.querySelector(`input[name=ea${i}]:checked`)||{value:0}).value),h:$('eh'+i).value.trim(),e:$('ee'+i).value.trim()}))}
+function emsg(t){const m=$('emsg');m.classList.remove('hide');m.textContent=t}
+function addQ(){collectE();EQ.push({q:'',o:['','','',''],a:0,h:'',e:''});drawE()}
+function delQ(i){collectE();EQ.splice(i,1);drawE()}
+function saveE(){
+ collectE();if(!EQ.length){emsg('ต้องมีอย่างน้อย 1 ข้อ');return}
+ const bad=EQ.findIndex(x=>!x.q||x.o.some(o=>!o));if(bad>=0){emsg(`ข้อ ${bad+1} ยังกรอกโจทย์หรือตัวเลือกไม่ครบ`);return}
+ db.q=JSON.parse(JSON.stringify(EQ));save();log(`ครูแก้ไขแบบฝึกหัด (${EQ.length} ข้อ)`);emsg(`✅ บันทึกแล้ว มีแบบฝึกหัด ${EQ.length} ข้อ`);
+}
+function resetE(){
+ const b=event.target;
+ if(b.dataset.s!=='1'){b.dataset.s='1';b.textContent='กดอีกครั้งเพื่อยืนยัน';setTimeout(()=>{b.dataset.s='';b.textContent='↩ คืนค่าข้อสอบเดิม'},4000);return}
+ b.dataset.s='';b.textContent='↩ คืนค่าข้อสอบเดิม';delete db.q;save();EQ=JSON.parse(JSON.stringify(Q));drawE();emsg('คืนค่าข้อสอบเดิม '+Q.length+' ข้อแล้ว');
+}
+</script></body></html>
